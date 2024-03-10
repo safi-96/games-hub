@@ -6,13 +6,19 @@ import {
   List,
   ListItem,
   Text,
-} from "@chakra-ui/react";
-import getCroppedImageUrl from "../services/image-url";
-import genres from "../data/genres";
+} from '@chakra-ui/react';
+import useGenres from '../hooks/useGenres';
+import getCroppedImageUrl from '../services/image-url';
+import { useGameQueryStore } from '../store';
 
 const GenreList = () => {
-  const data = genres;
-  debugger;
+  const { data, isLoading, error } = useGenres();
+  const genreId = useGameQueryStore(s => s.gameQuery.genreId);
+  const setGenreId = useGameQueryStore(s => s.setGenreId);
+
+  if (error) return null;
+
+  if (isLoading) return <Text>Loading</Text>;
 
   return (
     <>
@@ -20,7 +26,7 @@ const GenreList = () => {
         Genres
       </Heading>
       <List>
-        {data?.results.map((genre) => (
+        {data?.results.map(genre => (
           <ListItem key={genre.id} paddingBottom="12px">
             <HStack>
               <Image
@@ -30,7 +36,8 @@ const GenreList = () => {
                 src={getCroppedImageUrl(genre.image_background)}
               />
               <Button
-                fontWeight="normal"
+                fontWeight={genreId === genre.id ? 'bold' : 'normal'}
+                onClick={() => setGenreId(genre.id)}
                 variant="link"
                 fontSize="md"
                 whiteSpace="normal"

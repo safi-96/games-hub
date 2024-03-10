@@ -1,10 +1,10 @@
-import { Box, Image } from "@chakra-ui/react";
-import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
-import ColorModeSwitch from "./ColorModeSwitch";
-import SearchInput from "./SearchInput";
+import { Box, Image } from '@chakra-ui/react';
+import logo from '../assets/logo.png';
+import ColorModeSwitch from './ColorModeSwitch';
+import SearchInput from './SearchInput';
+import { Link } from 'react-router-dom';
 
-function Navbar() {
+const Navbar = () => {
   return (
     <Box
       boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
@@ -19,8 +19,8 @@ function Navbar() {
         <Image
           src={logo}
           boxSize={{
-            base: "40px",
-            md: "50px",
+            base: '40px',
+            md: '50px',
           }}
         />
       </Link>
@@ -30,6 +30,6 @@ function Navbar() {
       <ColorModeSwitch />
     </Box>
   );
-}
+};
 
 export default Navbar;
